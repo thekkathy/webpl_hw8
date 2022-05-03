@@ -35,7 +35,12 @@ export class GameComponent implements OnInit {
 
   replay(){
     this.guess = "";
-    this.answer = "test"
+    this.guessService.sendQuery().subscribe(
+      (respData) => { 
+        // do something
+        this.answer = respData.word;
+      }
+    );
     this.won = false;
     this.inputEntered = false;
     this.showAlert = false;

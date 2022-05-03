@@ -15,7 +15,8 @@ export class GuessService {
     // Note, for my setup, I need https.  For XAMPP,
     // you will likely need http instead.
     return this.http.post<any>(
-      "http://localhost/hw8/wordle_api.php",
+      //"http://localhost/hw8/wordle_api.php",
+      "https://cs4640.cs.virginia.edu/kck3due/hw8/wordle_api.php",
       null
     )
   }
