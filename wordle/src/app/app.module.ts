@@ -6,6 +6,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { GameComponent } from './game/game.component';
 
+//App Link: https://cs4640.cs.virginia.edu/kck3due/hw8/dist/wordle/
+
 @NgModule({
   declarations: [
     AppComponent,
