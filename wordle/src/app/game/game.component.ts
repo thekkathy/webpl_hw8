@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PreviousGuess } from '../previous-guess';
+import { GuessService } from '../guess.service';
 
 @Component({
   selector: 'app-game',
@@ -10,29 +11,42 @@ export class GameComponent implements OnInit {
 
   guess:string;
   answer:string;
-  checkRes:boolean;
+  won:boolean;
   showAlert:boolean;
+  inputEntered:boolean;
   guesses:Array<PreviousGuess>;
 
-  constructor() { 
+  constructor(
+    private guessService:GuessService
+  ) { 
     this.guess = "";
-    this.answer = "test"
-    this.checkRes = false;
+    this.won = false;
     this.showAlert = false;
+    this.inputEntered = false;
     this.guesses = [];
+    this.answer="test";
+    this.guessService.sendQuery().subscribe(
+      (respData) => { 
+        // do something
+        this.answer = respData.word;
+      }
+    );
   }
 
   replay(){
     this.guess = "";
     this.answer = "test"
-    this.checkRes = false;
+    this.won = false;
+    this.inputEntered = false;
     this.showAlert = false;
     this.guesses = [];
   }
 
   checkWord(){
-    this.checkRes = this.guess === this.answer;
+    this.guess = this.guess.toLowerCase();
+    this.won = this.guess === this.answer;
     this.showAlert = true;
+    this.inputEntered = false;
     const prevGuess = new PreviousGuess(
       this.guess, 
       this.countCharsInWord(), 
